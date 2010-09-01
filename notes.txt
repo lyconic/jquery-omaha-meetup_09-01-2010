@@ -1,4 +1,4 @@
-### Meeting Notes
+# Meeting Notes
 
 ## gems
 
@@ -15,15 +15,6 @@ ActiveRecord::Base.establish_connection(
   :password => 'passw0rd'
 )
 
-ActiveRecord::Schema.define do
-  create_table :quotes do |t|
-    t.text :body, :null => false
-    t.string :attribution, :null => false
-  end
-end
-
-curl -i --url http://localhost:4567/quotes -d body=testing -d "author=Adam Lassek"
-
 ## further reading
 
 "The S stands for Simple"
@@ -31,3 +22,6 @@ http://wanderingbarque.com/nonintersecting/2006/11/15/the-s-stands-for-simple/
 
 "How I Explained REST to My Wife"
 http://tomayko.com/writings/rest-to-my-wife
+
+"If You Learn Only One New Thing This Year, Make It Rack"
+http://blog.wekeroad.com/tutorials/rack-melts-faces
