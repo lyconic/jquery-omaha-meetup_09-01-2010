@@ -1,0 +1,33 @@
+### Meeting Notes
+
+## gems
+
+sinatra sinatra-reloader
+mysql activerecord
+
+## db
+
+ActiveRecord::Base.establish_connection(
+  :adapter => 'mysql',
+  :database => 'rest_demo',
+  :reconnect => true,
+  :username => 'root',
+  :password => 'passw0rd'
+)
+
+ActiveRecord::Schema.define do
+  create_table :quotes do |t|
+    t.text :body, :null => false
+    t.string :attribution, :null => false
+  end
+end
+
+curl -i --url http://localhost:4567/quotes -d body=testing -d "author=Adam Lassek"
+
+## further reading
+
+"The S stands for Simple"
+http://wanderingbarque.com/nonintersecting/2006/11/15/the-s-stands-for-simple/
+
+"How I Explained REST to My Wife"
+http://tomayko.com/writings/rest-to-my-wife
