@@ -23,6 +23,6 @@ mysql activerecord
 
 [If You Learn Only One New Thing This Year, Make It Rack][2]
 
-  [0]: http://wanderingbarque.com/nonintersecting/2006/11/15/the-s-stands-for-simple/
+  [0]: http://webcache.googleusercontent.com/search?q=cache:XwEfa0sAm1cJ:wanderingbarque.com/nonintersecting/2006/11/15/the-s-stands-for-simple/+The+S+Stands+for+Simple&hl=en&gl=us&strip=0
   [1]: http://tomayko.com/writings/rest-to-my-wife
   [2]: http://blog.wekeroad.com/tutorials/rack-melts-faces
