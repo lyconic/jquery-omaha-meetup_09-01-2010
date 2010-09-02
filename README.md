@@ -1,11 +1,11 @@
-# Meeting Notes
+# Meeting Notes for 09-01-2010
 
-## gems
+## gems installed
 
 sinatra sinatra-reloader
 mysql activerecord
 
-## db
+## db connection
 
 ActiveRecord::Base.establish_connection(
   :adapter => 'mysql',
