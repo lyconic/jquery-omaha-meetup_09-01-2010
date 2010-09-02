@@ -10,11 +10,109 @@
     
     <ul id="quotes">
       <% @quotes.each do |quote| %>
-      <li>
+      <li class="quote">
         <p><%= quote.body %></p>
         -- <em><%= quote.author %></em>
+        <a href="#edit_quote" data-quote-id="<%= quote.id %>" data-behavior="edit">edit</a>
+        <a href="#delete_quote" data-quote-id="<%= quote.id %>" data-behavior="delete">delete</a>
       </li>
       <% end %>
     </ul>
+    
+    <form action="/quotes" id="new_quote">
+      <p>
+        <label for="quote_body">Body:</label><br />
+        <textarea id="quote_body" name="quote[body]" cols="40" rows="4"></textarea>
+      </p>
+      <p>
+        <label for="quote_author">Author:</label><br />
+        <input type="text" id="quote_author" name="quote[author]" />
+      </p>
+      <input type="submit" value="Submit" />
+    </form>
+    
+    <script type="text/javascript">
+      function getQuote() {
+        return {
+          id: $('form').attr('data-quote-id'),
+          'quote[body]': $('textarea#quote_body').val(),
+          'quote[author]': $('input#quote_author').val()
+        };
+      }
+      
+      $(document).ready(function() {
+        $('form')[0].reset(); //because FF is WAY too agressive at filling these things in
+        
+        // Capture the form submission
+        $('input[type=submit]').click(function() {
+          var quote = getQuote();
+          
+          if (quote.id) {
+            
+            $.update(
+              '/quotes/{id}',
+              quote,
+              function(updatedQuote) {
+                var quoteHtml = $('a[data-quote-id=' + updatedQuote.id + ']').parent('li');
+                quoteHtml.find('p').html(updatedQuote.body);
+                quoteHtml.find('em').html(updatedQuote.author);
+              }
+            );
+            
+          } else {
+            
+            $.post(
+              '/quotes', 
+              quote,
+              function(newQuote) {
+                var quoteHtml = $('ul#quotes li:last').clone();
+                quoteHtml.find('p').html(newQuote.body);
+                quoteHtml.find('em').html(newQuote.author);
+                quoteHtml.find('a').attr('data-quote-id', newQuote.id);
+                quoteHtml.appendTo('ul#quotes');
+              }
+            );
+
+          }
+
+          $('form#new_quote')[0].reset();
+          $('form').removeAttr('data-quote-id');
+          return false; // Don't submit the form to the server
+          
+        });
+        
+        // Wireup edit links
+        $('ul#quotes').delegate('a[data-behavior=edit]', 'click', function() {
+
+          $.read(
+            '/quotes/{id}',
+            { id: $(this).attr('data-quote-id') },
+            function (response) {
+              $('form').attr('data-quote-id', response.id);
+              $('textarea#quote_body').val(response.body);
+              $('input#quote_author').val(response.author);
+            }
+          );
+          
+          return false;
+        });
+        
+        // Wireup delete links
+        $('ul#quotes').delegate('a[data-behavior=delete]', 'click', function() {
+          var quote = $(this).parent('li');
+          
+          $.destroy(
+            '/quotes/{id}',
+            { id: $(this).attr('data-quote-id') },
+            function() {
+              quote.remove();
+            }
+          );
+          
+          return false;
+          
+        });
+      });
+    </script>
   </body>
 </html>
