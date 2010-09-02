@@ -17,11 +17,12 @@ ActiveRecord::Base.establish_connection(
 
 ## further reading
 
-"The S stands for Simple"
-http://wanderingbarque.com/nonintersecting/2006/11/15/the-s-stands-for-simple/
+[The S stands for Simple][0]
 
-"How I Explained REST to My Wife"
-http://tomayko.com/writings/rest-to-my-wife
+[How I Explained REST to My Wife][1]
 
-"If You Learn Only One New Thing This Year, Make It Rack"
-http://blog.wekeroad.com/tutorials/rack-melts-faces
+[If You Learn Only One New Thing This Year, Make It Rack][2]
+
+  [0]: http://wanderingbarque.com/nonintersecting/2006/11/15/the-s-stands-for-simple/
+  [1]: http://tomayko.com/writings/rest-to-my-wife
+  [2]: http://blog.wekeroad.com/tutorials/rack-melts-faces
