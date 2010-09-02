@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hello, World!</title>
+    <title>Quotes Database</title>
+    <script type="text/javascript" src="/jquery.js"></script>
+    <script type="text/javascript" src="/jquery.rest.js"></script>
   </head>
   <body>
-    <h1>Hello, World!</h1>
+    <h1>Quotes Database</h1>
+    
+    <ul id="quotes">
+      <% @quotes.each do |quote| %>
+      <li>
+        <p><%= quote.body %></p>
+        -- <em><%= quote.author %></em>
+      </li>
+      <% end %>
+    </ul>
   </body>
 </html>
