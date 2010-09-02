@@ -7,13 +7,13 @@ mysql activerecord
 
 ## db connection
 
-ActiveRecord::Base.establish_connection(
-  :adapter => 'mysql',
-  :database => 'rest_demo',
-  :reconnect => true,
-  :username => 'root',
-  :password => 'passw0rd'
-)
+    ActiveRecord::Base.establish_connection(
+      :adapter => 'mysql',
+      :database => 'rest_demo',
+      :reconnect => true,
+      :username => 'root',
+      :password => 'passw0rd'
+    )
 
 ## further reading
 
