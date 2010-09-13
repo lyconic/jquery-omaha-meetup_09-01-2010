@@ -2,7 +2,7 @@
 
 ## gems installed
 
-sinatra sinatra-reloader
+sinatra sinatra-reloader rack_csrf
 mysql activerecord
 
 ## db connection
