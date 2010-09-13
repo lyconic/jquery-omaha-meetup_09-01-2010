@@ -22,6 +22,13 @@
 
 (function($){
     
+    // Change the values of this global object if your csrf token or method
+    // parameter are different. You can set csrf to null to skip it (but you shouldn't)
+    $.restSetup = {
+      csrf: { authenticity_token: null },
+      methodParam: '_method'
+    };
+    
     // jQuery doesn't provide a better way of intercepting the ajax settings object
     var _ajax = $.ajax, 
         options = { dataType: 'json' };
@@ -71,21 +78,20 @@
       settings.type = settings.type || "GET";
           
       if (typeof settings.data !== "string")
-      if (settings.data !== undefined)
-      if (settings.data !== null) {
+      if (settings.data != null) {
           settings.data = $.param(settings.data);
       }
       
       settings.data = settings.data || "";
       
-      if ("AUTH_TOKEN" in window)
+      if ($.restSetup.csrf && !$.isEmptyObject($.restSetup.csrf))
       if (!/^(get)$/i.test(settings.type))
       if (!/(authenticity_token=)/i.test(settings.data)) {
-          settings.data += (settings.data ? "&" : "") + "authenticity_token=" + encodeURIComponent(AUTH_TOKEN);
+          settings.data += (settings.data ? "&" : "") + $.param($.restSetup.csrf);
       }
       
       if (!/^(get|post)$/i.test(settings.type)) {
-          settings.data += (settings.data ? "&" : "") + "_method=" + settings.type.toLowerCase();
+          settings.data += (settings.data ? "&" : "") + $.restSetup.methodParam + '=' + settings.type.toLowerCase();
           settings.type = "POST";
       }
 
