@@ -2,6 +2,10 @@ require "rubygems"
 require "sinatra"
 require "sinatra/reloader" if development?
 require "activerecord"
+require "rack/csrf"
+
+use Rack::Session::Cookie
+use Rack::Csrf
 
 configure do
   ActiveRecord::Base.establish_connection(

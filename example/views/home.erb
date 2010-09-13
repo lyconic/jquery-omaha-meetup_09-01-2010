@@ -20,6 +20,7 @@
     </ul>
     
     <form action="/quotes" id="new_quote">
+      <%= Rack::Csrf.csrf_tag(env) %>
       <p>
         <label for="quote_body">Body:</label><br />
         <textarea id="quote_body" name="quote[body]" cols="40" rows="4"></textarea>
@@ -41,6 +42,9 @@
       }
       
       $(document).ready(function() {
+        // Set the csrf token in $.restSetup
+        $.restSetup.csrf = { '_csrf': "<%= Rack::Csrf.csrf_token(env) %>" };
+        
         $('form')[0].reset(); //because FF is WAY too agressive at filling these things in
         
         // Capture the form submission
